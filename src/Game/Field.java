@@ -18,6 +18,8 @@ public class Field {
 
     private int type;
     private ArrayList<Unit> units;
+    public boolean visible;
+    private int health;
 
     public int getPositionX() {
         return positionX;
@@ -30,6 +32,8 @@ public class Field {
     private int positionX, positionY;
 
     public Field(int type, int positionX, int positionY) {
+        this.health = 100;
+        this.visible = false;
         this.type = type;
         this.positionX = positionX;
         this.positionY = positionY;
@@ -74,5 +78,23 @@ public class Field {
 
     public void removeUnit(Unit unit) {
         units.remove(unit);
+    }
+
+    public void update(){
+        for (Unit unit: units){
+            unit.updateField();
+        }
+    }
+
+    public int getHealth() {
+        return health;
+    }
+
+    public void setHealth(int health) {
+        if (health <= 0){
+            type = TYPE_TUNNEL;
+            health = 0;
+        }
+        this.health = health;
     }
 }

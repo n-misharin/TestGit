@@ -1,8 +1,8 @@
 package Game;
 
 public class Guardian extends Unit{
-    public Guardian(Field field) {
-        super(TYPE_GUARDIAN, field, SPEED_GUARDIAN);
+    public Guardian(Field field, Player player) {
+        super(TYPE_GUARDIAN, field, SPEED_GUARDIAN, player);
     }
 
     @Override

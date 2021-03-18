@@ -11,13 +11,24 @@ public class Unit {
     public static final int SPEED_KAMIKAZE = 3;
     public static final int SPEED_GUARDIAN = 3;
 
+    public static final int COST_WORKER = 20;
+    public static final int COST_TRANSPORT = 30;
+    public static final int COST_KAMIKAZE = 40;
+    public static final int COST_GUARDIAN = 40;
+
     protected int type, speed;
     protected Field position;
+    protected Player player;
 
     public Unit(int type, Field field, int speed) {
+        this(type, field, speed, new Player("Компьютер Вася"));
+    }
+
+    public Unit(int type, Field field, int speed, Player player){
         this.type = type;
         this.position = field;
         this.speed = speed;
+        this.player = player;
     }
 
     public boolean isCanMove(Field field){
@@ -32,5 +43,16 @@ public class Unit {
             position.removeUnit(this);
             speed -= 1;
         }
+    }
+
+    public static int getCost(int unitType){
+        if (unitType == TYPE_TRANSPORT) return COST_TRANSPORT;
+        if (unitType == TYPE_GUARDIAN) return COST_GUARDIAN;
+        if (unitType == TYPE_KAMIKAZE) return COST_KAMIKAZE;
+        return COST_WORKER;
+    }
+
+    public void updateField() {
+        //
     }
 }

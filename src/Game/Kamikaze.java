@@ -1,8 +1,8 @@
 package Game;
 
 public class Kamikaze extends Unit{
-    public Kamikaze(Field field) {
-        super(TYPE_KAMIKAZE, field, SPEED_KAMIKAZE);
+    public Kamikaze(Field field, Player player) {
+        super(TYPE_KAMIKAZE, field, SPEED_KAMIKAZE, player);
     }
 
     @Override

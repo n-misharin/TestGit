@@ -2,8 +2,10 @@ package Game;
 
 public class Worker extends Unit{
 
-    public Worker(Field field) {
-        super(TYPE_WORKER, field, SPEED_WORKER);
+    public static final int POWER = 30;
+
+    public Worker(Field field, Player player) {
+        super(TYPE_WORKER, field, SPEED_WORKER, player);
     }
 
     @Override
@@ -21,6 +23,21 @@ public class Worker extends Unit{
             }else{
                 speed -= 1;
             }
+        }
+    }
+
+    @Override
+    public void updateField() {
+        position.setHealth(position.getHealth() - POWER);
+        try {
+            if (Field.TYPE_GOLD == position.getType()){
+                player.calculateResource(Game.RESOURCE_TYPE_GOLD, POWER);
+            }
+            if (Field.TYPE_OIL == position.getType()){
+                player.calculateResource(Game.RESOURCE_TYPE_OIL, POWER);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }
